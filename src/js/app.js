@@ -15,3 +15,9 @@ const player4 = new Swordsman('Arthur', 'Swordsman');
 const player5 = new Undead('Crispy', 'Undead');
 const player6 = new Zombie('Shawn', 'Zombie');
 console.log(player1,player2,player3,player4,player5,player6);
+
+player3.levelUp();
+console.log(player3);
+
+player3.damage(35);
+console.log(player3);
