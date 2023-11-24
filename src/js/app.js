@@ -1,23 +1,28 @@
-// TODO: write your code here
-import Bowerman from './Bowerman';
-import Daemon from './Daemon';
-import Magician from './Magician';
-import Swordsman from './Swordsman';
-import Undead from './Undead';
-import Zombie from './Zombie';
+const obj = {name: 'мечник', health: 10, level: 2, attack: 80, defence: 40};
 
-console.log('worked');
+const props = ["name", "level"];
 
-const player1 = new Bowerman('Legolas', 'Bowerman');
-const player2 = new Daemon('Lucifer', 'Daemon');
-const player3 = new Magician('Merlin', 'Magician');
-const player4 = new Swordsman('Arthur', 'Swordsman');
-const player5 = new Undead('Crispy', 'Undead');
-const player6 = new Zombie('Shawn', 'Zombie');
-console.log(player1,player2,player3,player4,player5,player6);
+export default function orderByProps(object, props) {
+    const result = [];
+    for (let i = 0; i < props.length; i++) {
+        for(const prop in object) {
+            if(prop == props[i]) {
+                result.push({key: prop, value: object[prop]});
+                Object.defineProperty(object, prop, {
+                    enumerable: false
+                })
+            }
+        }
+    }
+    const remainder = Object.keys(object).sort();
+    for(let j = 0; j < remainder.length; j++) {
+        for(const prop in object) {
+            if (remainder[j] === prop) {
+                result.push({key: prop, value: object[prop]});
+            }
+        }
+    }
+    return result;
+}
 
-player3.levelUp();
-console.log(player3);
-
-player3.damage(35);
-console.log(player3);
+console.log(orderByProps(obj, props));
